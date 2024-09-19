@@ -55,7 +55,7 @@ export function App() {
                   type="button"
                   className="button is-info"
                 >
-                  -
+                  −
                 </button>
               ) : (
                 <button
