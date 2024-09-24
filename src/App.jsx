@@ -30,37 +30,38 @@ export function App() {
 
   return (
     <main className="section container">
-      {selectedGood ? (
-        <h1 className="title is-flex is-align-items-center">
-          {selectedGood} is selected
-          <button
-            onClick={handleReset}
-            data-cy="ClearButton"
-            type="button"
-            className="delete ml-3"
-          />
-        </h1>
-      ) : (
-        <h1 className="title is-flex is-align-items-center">
-          No goods selected
-        </h1>
-      )}
+      <h1 className="title is-flex is-align-items-center">
+        {selectedGood ? (
+          <>
+            {`${selectedGood} is selected`}
+            <button
+              onClick={handleReset}
+              data-cy="ClearButton"
+              type="button"
+              className="delete ml-3"
+            />
+          </>
+        ) : (
+          'No goods selected'
+        )}
+      </h1>
 
       <table className="table">
         {goods.map(good => {
           const isGoodSelected = good === selectedGood;
 
+          const changingGoodButtonCondition = () =>
+            isGoodSelected ? handleReset() : handleGood(good);
+
           return (
             <tr
               key={good}
               data-cy="Good"
-              className={isGoodSelected ? 'has-background-success-light' : ''}
+              className={cn({ 'has-background-success-light': isGoodSelected })}
             >
               <td>
                 <button
-                  onClick={() =>
-                    isGoodSelected ? handleReset() : handleGood(good)
-                  }
+                  onClick={changingGoodButtonCondition}
                   data-cy={isGoodSelected ? 'RemoveButton' : 'AddButton'}
                   type="button"
                   className={cn('button', { 'is-info': isGoodSelected })}
