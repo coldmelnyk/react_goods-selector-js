@@ -18,31 +18,28 @@ export const goods = [
 ];
 
 export function App() {
-  const [selectedGood, setGood] = useState('Jam');
+  const [selectedGood, setSelectedGood] = useState('Jam');
 
   const handleReset = () => {
-    setGood('');
+    setSelectedGood('');
   };
 
   const handleGood = good => {
-    setGood(good);
+    setSelectedGood(good);
   };
 
   return (
     <main className="section container">
       <h1 className="title is-flex is-align-items-center">
-        {selectedGood ? (
-          <>
-            {`${selectedGood} is selected`}
-            <button
-              onClick={handleReset}
-              data-cy="ClearButton"
-              type="button"
-              className="delete ml-3"
-            />
-          </>
-        ) : (
-          'No goods selected'
+        {selectedGood ? `${selectedGood} is selected` : 'No goods selected'}
+
+        {selectedGood && (
+          <button
+            data-cy="ClearButton"
+            type="button"
+            className="delete ml-3"
+            onClick={() => setSelectedGood(null)}
+          />
         )}
       </h1>
 
